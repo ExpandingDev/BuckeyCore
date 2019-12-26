@@ -1,23 +1,46 @@
 #include "Service.h"
 #include <sstream>
 
-void Buckey::Service::changeState(Buckey::Service::State s) {
-    currentState.store(s);
-    ///TODO: Send off a state changed event
+Buckey::Service::Service(std::string version, std::string name) {
+    statusLock.lock();
+    status.name = name;
+    status.version = version;
+    status.pid = 0;
+    status.code = 200;
+    status.message = "Default service status message";
+    status.state = Buckey::Service::State::RUNNING;
+    statusLock.unlock();
+    setStateChangedCallback(Buckey::Service::emptyStateChangedCallback);
+    setErrorCallback(Buckey::Service::emptyErrorCallback);
+}
+
+void Buckey::Service::setState(Buckey::Service::State s) {
+    statusLock.lock();
+    status.state = s;
+    stateChangedCallback(status);
+    statusLock.unlock();
 }
 
 void Buckey::Service::signalError(std::string error) {
-    ///TODO: Send off an error signal
+    errorCallback(error);
 }
 
-std::string Buckey::Service::generateStatusResponse(unsigned int pid, std::string version, Buckey::Service::State s, std::string message, unsigned int code) {
+void Buckey::Service::signalStatus() {
+    //TODO: Implement this
+        statusLock.lock();
+        std::string s = Buckey::Service::generateStatusResponse(status);
+        statusLock.unlock();
+        
+}
+
+std::string Buckey::Service::generateStatusResponse(StatusResponse r) {
     ///TODO: Implement this
-    std::string r = std::to_string(pid);
-    r += "," + version + ",";
-    r += std::to_string(Buckey::Service::stateToInt(s));
-    r += "," + message + ",";
-    r += std::to_string(code);
-    return r;
+    std::string s = std::to_string(r.pid);
+    s += "," + r.name + r.version + ",";
+    s += std::to_string(Buckey::Service::stateToInt(r.state));
+    s += "," + r.message + ",";
+    s += std::to_string(r.code);
+    return s;
 }
 
 Buckey::Service::StatusResponse Buckey::Service::parseStatusResponse(std::string response) {
@@ -26,23 +49,26 @@ Buckey::Service::StatusResponse Buckey::Service::parseStatusResponse(std::string
     std::string parsed;
     unsigned short position = 0;
     //pid,version,status,message,status-code
-    while(position < 5 ) {
+    while(position < 6 ) {
         std::getline(s, parsed, ',');
         
         switch(position) {
             case 0: //pid
                r.pid = std::stoi(parsed);
             break;
-            case 1: //version
+            case 1: //name
+                r.name = parsed;
+            break;
+            case 2: //version
                 r.version = parsed;
             break;
-            case 2: //status
+            case 3: //status
                 r.state = stateFromInt(std::stoi(parsed));
             break;
-            case 3: //message
+            case 4: //message
                 r.message = parsed;
             break;
-            case 4: //code
+            case 5: //code
                 r.code = std::stoi(parsed);
             break;
             default:
@@ -105,3 +131,56 @@ int Buckey::Service::stateToInt(Buckey::Service::State s) {
         break;    
     }
 }
+
+Buckey::Service::StatusResponse Buckey::Service::getStatus() {
+    Buckey::Service::StatusResponse r;
+    statusLock.lock();
+    r = status;
+    statusLock.unlock();
+    return r;
+}
+
+std::string Buckey::Service::getStatusString() {
+    return Buckey::Service::generateStatusResponse(this->getStatus());
+}
+
+void Buckey::Service::setPID(unsigned int p) {
+    statusLock.lock();
+    status.pid = p;
+    statusLock.unlock();
+}
+
+void Buckey::Service::setName(std::string n) {
+    statusLock.lock();
+    status.name = n;
+    statusLock.unlock();
+}
+
+void Buckey::Service::setVersion(std::string v) {
+    statusLock.lock();
+    status.version = v;
+    statusLock.unlock();
+}
+
+void Buckey::Service::setStatusCode(unsigned int c) {
+    statusLock.lock();
+    status.code = c;
+    statusLock.unlock();
+}
+
+void Buckey::Service::setStatusMessage(std::string m) {
+    statusLock.lock();
+    status.message = m;
+    statusLock.unlock();
+}
+
+void Buckey::Service::setStateChangedCallback(void (*c)(Buckey::Service::StatusResponse)) {
+    stateChangedCallback = c;
+}
+
+void Buckey::Service::setErrorCallback(void (*c)(std::string)) {
+    errorCallback = c;
+}
+
+void Buckey::Service::emptyStateChangedCallback(Buckey::Service::StatusResponse r) { }
+void Buckey::Service::emptyErrorCallback(std::string e) { }

@@ -10,3 +10,7 @@ Buckey::ServiceAdapter::ServiceAdapter(Buckey::Service * adaptee, std::string pa
 std::shared_ptr<Buckey::ServiceAdapter> Buckey::ServiceAdapter::create(Buckey::Service * adaptee, std::string path) {
     return std::shared_ptr<Buckey::ServiceAdapter>(new Buckey::ServiceAdapter(adaptee, path));
 }
+
+void Buckey::ServiceAdapter::signalError(std::string e) {
+   // DBus::signal<void, std::string> s = 
+}
