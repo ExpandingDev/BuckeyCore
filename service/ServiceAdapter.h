@@ -13,10 +13,13 @@ namespace Buckey {
         friend class Service;
         protected:
             ServiceAdapter(Buckey::Service * adaptee, std::string path);
+            DBus::signal<void, std::string>::pointer errorSignal;  
+            DBus::signal<void, std::string>::pointer stateChangedSignal;            
+            
         public:
             static std::shared_ptr<ServiceAdapter> create(Buckey::Service * adaptee, std::string path);
-            void signalError(std::string e);
-            void signalStateChange(Buckey::Service::State s);
+            static void signalError(Buckey::ServiceAdapter * a, std::string e);
+            static void signalStateChange(Buckey::ServiceAdapter * a, Buckey::Service::StatusResponse s);
     };
 }
 #endif /* SERVICEADAPTER_H */

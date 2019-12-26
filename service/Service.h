@@ -5,8 +5,7 @@
 #include <string>
 #include <mutex>
 #include <atomic>
-
-#include "dbus-cxx.h"
+#include <functional>
 
 namespace Buckey{
     class Service {
@@ -38,8 +37,8 @@ namespace Buckey{
             //DBus stuff
             void signalError(std::string error);
             void signalStatus();
-            void setErrorCallback(void (* callback)(std::string e));
-            void setStateChangedCallback(void (* callback)(StatusResponse s));
+            void setErrorCallback(std::function<void(std::string)> c);
+            void setStateChangedCallback(std::function<void(StatusResponse)> c);
             
             //Constructor and destructor
             Service(std::string version, std::string name);
@@ -57,8 +56,8 @@ namespace Buckey{
             StatusResponse status;
             std::mutex statusLock;
             
-            void (* errorCallback)(std::string);
-            void (* stateChangedCallback)(StatusResponse);
+            std::function<void(std::string)> errorCallback;
+            std::function<void(StatusResponse)> stateChangedCallback;
             
             static void emptyErrorCallback(std::string e);
             static void emptyStateChangedCallback(StatusResponse e);

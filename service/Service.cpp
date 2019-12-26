@@ -174,11 +174,11 @@ void Buckey::Service::setStatusMessage(std::string m) {
     statusLock.unlock();
 }
 
-void Buckey::Service::setStateChangedCallback(void (*c)(Buckey::Service::StatusResponse)) {
+void Buckey::Service::setStateChangedCallback(std::function<void(Buckey::Service::StatusResponse)> c) {
     stateChangedCallback = c;
 }
 
-void Buckey::Service::setErrorCallback(void (*c)(std::string)) {
+void Buckey::Service::setErrorCallback(std::function<void(std::string)> c) {
     errorCallback = c;
 }
 
