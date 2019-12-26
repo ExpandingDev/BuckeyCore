@@ -1,0 +1,16 @@
+<interface name="ca.l5.expandingdev.Buckey.Mode" >
+
+    <method name="stop" />
+    <method name="reload" />
+
+    <method name="getStatus" >
+        <arg name="status" type="y" direction="out" />
+        <arg name="message" type="s" direction="out" />
+        <arg name="code" type="i" direction="out" />
+        <arg name="version" type="s" direction="out" />
+    </method>
+
+    <signal name="stateChanged" >
+        <arg name="status" type="y" />
+    </signal>
+</interface>
