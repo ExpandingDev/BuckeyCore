@@ -14,10 +14,10 @@ namespace Buckey {
         public:
             static std::shared_ptr<ServiceProxy> create(DBus::Connection::pointer conn, std::string dest, std::string path);
             Buckey::Service::StatusResponse getStatus();
-            
+
         protected:
             ServiceProxy(DBus::Connection::pointer conn, std::string dest, std::string path);
-            DBus::MethodProxy<Buckey::Service::StatusResponse>::pointer  m_method_getStatus;
+            DBus::MethodProxy<std::string>::pointer  m_method_getStatus;
     };
 }
 #endif /* SERVICEPROXY_H */

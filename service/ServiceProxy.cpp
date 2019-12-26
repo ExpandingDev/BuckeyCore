@@ -9,5 +9,6 @@ std::shared_ptr<Buckey::ServiceProxy> Buckey::ServiceProxy::create(DBus::Connect
 }
 
 Buckey::Service::StatusResponse Buckey::ServiceProxy::getStatus() {
-    return (*m_method_getStatus)();
+    std::string r = (*m_method_getStatus)();
+    return Buckey::Service::parseStatusResponse(r);
 }
