@@ -7,5 +7,5 @@ Name: @PROJECT_NAME@
 Description: Proxy object and adapter to interface with Buckey Services.
 Version: @PROJECT_VERSION@
 Requires: dbus-cxx-1.0 >= 0.11.0
-Libs: -L${libdir}/buckey -lbuckey-service
+Libs: -L${libdir} -lbuckey-service
 Cflags: -I${includedir}/buckey

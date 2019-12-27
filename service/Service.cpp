@@ -39,7 +39,7 @@ void Buckey::Service::signalStatus() {
 std::string Buckey::Service::generateStatusResponse(StatusResponse r) {
     ///TODO: Implement this
     std::string s = std::to_string(r.pid);
-    s += "," + r.name + r.version + ",";
+    s += "," + r.name + + "," + r.version + ",";
     s += std::to_string(Buckey::Service::stateToInt(r.state));
     s += "," + r.message + ",";
     s += std::to_string(r.code);

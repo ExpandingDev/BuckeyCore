@@ -14,8 +14,7 @@ add_library(buckey-service SHARED Service.cpp ServiceAdapter.cpp ServiceProxy.cp
 
 set_target_properties(buckey-service PROPERTIES
     VERSION ${PROJECT_VERSION}
-    SOVERSION 1
-    PUBLIC_HEADER Service.h ServiceProxy.h ServiceAdapter.h)
+    SOVERSION 1)
 
 configure_file(config.h.in config.h)
 configure_file(buckey-service.pc.in buckey-service.pc @ONLY)
@@ -29,8 +28,10 @@ target_include_directories(buckey-service PUBLIC "${DBUSCXX_INCLUDE_DIRS}")
 target_link_libraries(buckey-service PUBLIC "${DBUSCXX_LDFLAGS}")
 
 install(TARGETS buckey-service
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/buckey
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/buckey)
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+install(FILES Service.h ServiceAdapter.h ServiceProxy.h
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/buckey)
 
 install(FILES ${CMAKE_BINARY_DIR}/buckey-service.pc
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
