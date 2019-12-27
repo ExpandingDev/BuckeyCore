@@ -1,11 +1,11 @@
 prefix=@CMAKE_INSTALL_PREFIX@
 exec_prefix=@CMAKE_INSTALL_PREFIX@
-libdir=${exec_prefix}/@GMAKE_INSTALL_LIBDIR@
+libdir=${exec_prefix}/@CMAKE_INSTALL_LIBDIR@
 includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
 
 Name: @PROJECT_NAME@
 Description: Proxy object and adapter to interface with Buckey Services.
 Version: @PROJECT_VERSION@
 Requires: dbus-cxx-1.0 >= 0.11.0
-Libs: -L${libdir} -lbuckey-service
-Cflags: -I${includedir}buckey
+Libs: -L${libdir}/buckey -lbuckey-service
+Cflags: -I${includedir}/buckey

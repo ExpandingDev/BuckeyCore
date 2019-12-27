@@ -7,7 +7,7 @@ project(buckey-service-library
 #Pretty sure that dbus-cxx-1.0 requires C++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_INSTALL_PREFIX /usr/)
+set(CMAKE_INSTALL_PREFIX /usr)
 include(GNUInstallDirs)
 
 add_library(buckey-service SHARED Service.cpp ServiceAdapter.cpp ServiceProxy.cpp)
@@ -29,7 +29,7 @@ target_include_directories(buckey-service PUBLIC "${DBUSCXX_INCLUDE_DIRS}")
 target_link_libraries(buckey-service PUBLIC "${DBUSCXX_LDFLAGS}")
 
 install(TARGETS buckey-service
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/buckey
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/buckey)
 
 install(FILES ${CMAKE_BINARY_DIR}/buckey-service.pc

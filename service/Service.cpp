@@ -14,6 +14,10 @@ Buckey::Service::Service(std::string version, std::string name) {
     setErrorCallback(Buckey::Service::emptyErrorCallback);
 }
 
+Buckey::Service::~Service() {
+    
+}
+
 void Buckey::Service::setState(Buckey::Service::State s) {
     statusLock.lock();
     status.state = s;
@@ -28,9 +32,8 @@ void Buckey::Service::signalError(std::string error) {
 void Buckey::Service::signalStatus() {
     //TODO: Implement this
         statusLock.lock();
-        std::string s = Buckey::Service::generateStatusResponse(status);
+        stateChangedCallback(status);
         statusLock.unlock();
-        
 }
 
 std::string Buckey::Service::generateStatusResponse(StatusResponse r) {
