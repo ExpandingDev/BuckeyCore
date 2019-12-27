@@ -1,0 +1,56 @@
+<node cppname="Service" >
+<interface name="ca.l5.expandingdev.Buckey.Service" >
+
+
+    <method name="getStatus" >
+        <!-- The format of the below string is a csv in the following order:
+            pid,name,version,status,message,status-code
+            
+            pid - Process ID of the service
+            name - canonical name of the service
+            version - Version of the service
+            status - Status enum of the service
+            message - Status message from the service
+            code - Status code of the service
+            
+            status codes can be:
+                200-299 - OK
+                400-499 - Error
+                500-599 - Servere error        
+          -->        
+        <arg name="status" direction="out" type="s" />
+        
+    <!--  We have to condense these into a single string because dbus-cxx does not support multiple return values
+        <arg name="pid" type="i" direction="out" />
+        <arg name="version" type="s" direction="out" />
+        <arg name="status" type="y" direction="out" />
+        <arg name="message" type="s" direction="out" />
+        <arg name="code" type="i" direction="out" /> -->
+    </method>
+
+    <signal name="StateChanged" >
+        <arg name="status" type="s" direction="out" />
+        <!--
+            The format of the above string is a csv in the following order:
+            pid,name,version,status,message,status-code
+            
+            pid - Process ID of the service
+            name - canonical name of the service
+            version - Version of the service
+            status - Status enum of the service
+            message - Status message from the service
+            code - Status code of the service
+            
+            status codes can be:
+                200-299 - OK
+                400-499 - Error
+                500-599 - Servere error        
+        -->
+    </signal>
+    
+    <signal name="Error" >
+        <arg name="message" type="s" direction="out" />
+    </signal>
+    
+</interface>
+</node>
