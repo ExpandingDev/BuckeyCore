@@ -25,7 +25,7 @@ namespace Buckey{
                 unsigned int code;
             };
             typedef struct s_StatusResponse StatusResponse;
-            
+
             //Status stuff
             void setPID(unsigned int p);
             void setVersion(std::string v);
@@ -33,7 +33,7 @@ namespace Buckey{
             void setStatusCode(unsigned int c);
             void setStatusMessage(std::string m);
             void setState(Buckey::Service::State s);
-            
+
             //DBus stuff
             void signalError(std::string error);
             void signalStatus();
