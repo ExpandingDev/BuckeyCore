@@ -6,6 +6,6 @@ includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
 Name: @PROJECT_NAME@
 Description: Proxy object and adapter to interface with Buckey TTS Services.
 Version: @PROJECT_VERSION@
-Requires: dbus-cxx-1.0 >= 0.11.0
+Requires: dbus-cxx-1.0 >= 0.11.0, buckey-service
 Libs: -L${libdir} -lbuckey-tts
 Cflags: -I${includedir}/buckey
