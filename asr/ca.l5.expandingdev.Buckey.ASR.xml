@@ -1,0 +1,46 @@
+<node cppname="ASRService" namespace="Buckey" >
+	<interface name="ca.l5.expandingdev.Buckey.ASR" >
+
+		<method name="setListeningBehavior" >
+			<!-- The below "type" is an enum of the following values:
+				0 - Continuous, 2 - Push to speak, 3 - File based, 4 - stream based
+			-->
+			<arg name="type" type="y" direction="in" />
+		</method>
+
+		<method name="setGrammar" >
+			<!-- The JSGF grammar string to set recognition to use -->
+			<arg type="s" name="jsgf" direction="in" />
+		</method>
+
+		<method name="setLanguageModel" >
+			<!-- absolute path to the language model to use for speech recognition -->
+			<arg type="s" name="lmpath" direction="in" />
+		</method>
+
+		<method name="setKeyword" >
+			<arg type="s" name="keyword" direction="in" />
+		</method>
+
+		<method name="setRecognitionMode" >
+			<!-- Mode is an enum of the following values:
+				0 - JSGF grammar, 1 - language model
+			 -->
+			<arg type="y" name="mode" direction="in" />
+		</method>
+
+		<!-- The below methods will mainly be used for push to speak listening behavior -->
+		<method name="startListening" />
+		<method name="stopListening" />
+
+		<signal name="Hypothesis" />
+			<arg name="best-match" type="s" direction="out" />
+		</signal>
+
+		<signal name="SpeechStarted" />
+		<signal name="SpeechEnded" />
+
+		<signal name="ListeningStarted" />
+		<signal name="ListeningStopped" />
+	</interface>
+</node>
