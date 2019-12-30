@@ -10,6 +10,7 @@
 namespace Buckey {
 
 class TTSService : public Buckey::Service {
+    friend class TTSServiceAdapter;
     public:
         virtual void speak(std::string words ) = 0;
         virtual void prepareSpeech(std::string words ) = 0;
@@ -18,7 +19,8 @@ class TTSService : public Buckey::Service {
     	virtual std::string getState() = 0;
     	    
     	TTSService(std::string version, std::string name) : Buckey::Service(version, name) { };
-    	
+   
+   protected:
     	std::function<void(std::string)> voiceSwitchedCallback;
     	std::function<void(bool)> speechStateChangedCallback;
     	std::function<void(std::string)> speechPreparedCallback;        
