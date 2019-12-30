@@ -20,16 +20,22 @@ namespace Buckey {
         friend class ASRServiceAdapter;
         friend class ASRServiceProxy;
         public:
-            virtual void setListeningBehavior(uint8_t types) = 0;
+            virtual void setListeningBehavior(ListeningMode mode) = 0;
             virtual void setGrammar(std::string jsgf) = 0;
             virtual void setLanguageModel(std::string lmpath) = 0;
             virtual void setKeyword(std::string keyword) = 0;
-            virtual void setRecognitionMode(uint8_t mode) = 0;
+            virtual void setRecognitionMode(RecognitionMode mode) = 0;
             virtual void startListening() = 0;
             virtual void stopListening() = 0;
             
             ASRService(std::string version, std::string name) : Buckey::Service(version, name) {  };
-    
+
+            static ListeningMode listeningModeFromByte(uint8_t m);
+            static uint8_t byteFromListeningMode(ListeningMode l);
+            
+            static RecognitionMode recognitionModeFromByte(uint8_t m);
+            static uint8_t byteFromRecognitionMode(RecognitionMode l);
+            
         protected:
             std::function<void(std::string)> hypothesisCallback;
             std::function<void(unsigned short)> stateChangedCallback;
@@ -37,6 +43,9 @@ namespace Buckey {
             std::function<void()> speechStoppedCallback;
             std::function<void()> listeningStartedCallback;
             std::function<void()> listeningStoppedCallback;
+            
+            void _setListeningBehavior(uint8_t mode);
+            void _setRecognitionMode(uint8_t mode);
     };
 }
 #endif /* ASRSERVICEADAPTEE_H */
