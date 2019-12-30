@@ -45,7 +45,7 @@
 		</signal>
 
 		<signal name="SpeechStarted" />
-		<signal name="SpeechEnded" />
+		<signal name="SpeechStopped" />
 
 		<signal name="ListeningStarted" />
 		<signal name="ListeningStopped" />
