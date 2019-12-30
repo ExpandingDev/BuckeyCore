@@ -11,6 +11,7 @@ namespace Buckey {
 
 class TTSService : public Buckey::Service {
     friend class TTSServiceAdapter;
+    friend class TTSServiceProxy;
     public:
         virtual void speak(std::string words ) = 0;
         virtual void prepareSpeech(std::string words ) = 0;
