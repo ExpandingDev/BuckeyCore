@@ -3,7 +3,7 @@
 
 		<method name="setListeningBehavior" >
 			<!-- The below "type" is an enum of the following values:
-				0 - Continuous, 2 - Push to speak, 3 - File based, 4 - stream based
+				0 - Continuous, 1 - Push to speak, 2 - File based, 3 - stream based
 			-->
 			<arg name="type" type="y" direction="in" />
 		</method>
@@ -33,7 +33,14 @@
 		<method name="startListening" />
 		<method name="stopListening" />
 
-		<signal name="Hypothesis" />
+		<signal name="StateChanged" >
+			<!-- The "state" is an enum with the following values:
+				0 - Ready for recognition, 1 - loading, 2 - errored out
+			 -->
+			<arg name="state" type="y" direction="out" />
+		</signal>
+
+		<signal name="Hypothesis" >
 			<arg name="best-match" type="s" direction="out" />
 		</signal>
 

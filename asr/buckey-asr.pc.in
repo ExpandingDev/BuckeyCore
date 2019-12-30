@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${exec_prefix}/@CMAKE_INSTALL_LIBDIR@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+
+Name: @PROJECT_NAME@
+Description: Proxy object and adapter to interface with Buckey ASR Services.
+Version: @PROJECT_VERSION@
+Requires: dbus-cxx-1.0 >= 0.11.0, buckey-service
+Libs: -L${libdir} -lbuckey-asr
+Cflags: -I${includedir}/buckey
