@@ -9,17 +9,18 @@
 
 namespace Buckey {
     class ASRService : public Buckey::Service {
-        enum class ListeningMode {
-            CONTINUOUS = 0, PUSH_TO_SPEAK = 1, FILE = 2, STREAM = 3 
-        };
-        
-        enum class RecognitionMode {
-            JSGF = 0, LANGUAGE_MODEL = 1
-        };
         
         friend class ASRServiceAdapter;
         friend class ASRServiceProxy;
         public:
+            enum class ListeningMode {
+                CONTINUOUS = 0, PUSH_TO_SPEAK = 1, FILE = 2, STREAM = 3 
+            };
+            
+            enum class RecognitionMode {
+                JSGF = 0, LANGUAGE_MODEL = 1
+            };        
+        
             virtual void setListeningBehavior(ListeningMode mode) = 0;
             virtual void setGrammar(std::string jsgf) = 0;
             virtual void setLanguageModel(std::string lmpath) = 0;
