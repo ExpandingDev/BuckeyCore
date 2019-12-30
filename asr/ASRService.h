@@ -18,6 +18,7 @@ namespace Buckey {
         };
         
         friend class ASRServiceAdapter;
+        friend class ASRServiceProxy;
         public:
             virtual void setListeningBehavior(uint8_t types) = 0;
             virtual void setGrammar(std::string jsgf) = 0;
