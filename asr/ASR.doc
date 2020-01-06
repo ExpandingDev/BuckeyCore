@@ -1,0 +1,8 @@
+/**
+\page asr-intro ASR Service
+Speech Recognition
+==================
+Buckey Core contains a definition for basic manipulation and usage of a Speech to Text service.
+This definition is very basic and cannot manipulate the recognition behavior itself. This limitation is due to the complex and varied ways that speech recognition softwares handle configuration and recognition.
+
+*/
