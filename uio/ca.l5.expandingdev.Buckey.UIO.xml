@@ -1,0 +1,50 @@
+<node cppname="UIO" namespace="Buckey" >
+	<interface name="ca.l5.expandingdev.Buckey.Output" >
+		
+		<!-- At a minimum, should be displayed on GUIs and CLIs. Additional output is allowed. -->
+		<signal name="Error" >
+			<arg name="message" type="s" direction="out" />
+		</signal>
+
+		<!-- At a minimum, should be displayed on GUIs and CLIs. Additional output is allowed. -->
+		<signal name="Warning" >
+			<arg name="message" type="s" direction="out" />
+		</signal>
+		
+		<!-- Should be displayed on listening devices (with native notification implementation) and may be spoken by TTS. -->
+		<signal name="Notification" >
+			<arg name="message" type="s" direction="out" />
+			<arg name="title" type="s" direction="out" />
+			<arg name="id" type="s" direction="out" />
+		</signal>
+
+		<!-- Same output behavior as Notification, but may also trigger a sound effect. -->
+		<signal name="Alarm" >
+			<arg name="message" type="s" direction="out" />
+			<arg name="title" type="s" direction="out" />
+			<arg name="id" type="s" direction="out" />
+		</signal>
+
+		<!-- Text that should be displayed in GUIs, CLI, and spoken by TTS -->
+		<signal name="Speaking" >
+			<arg name="words" type="s" direction="out" />
+		</signal>
+
+		<!-- Text that should be displayed in GUIs and CLI interfaces. Should not be spoken. -->
+		<signal name="Log" >
+			<arg name="text" type="s" direction="out" />
+		</signal>
+
+	</interface>
+	<interface name="ca.l5.expandingdev.Buckey.Input" >
+		<!-- Should be interpreted directly as a command. -->
+		<signal name="Command" >
+			<arg name="command" type="s" direction="out" />
+		</signal>
+	
+		<!-- Can be a command, a reply, a question, or conversation. -->
+		<signal name="TextInput" >
+			<arg name="text" type="s" direction="out" />
+		</signal>
+	</interface>
+</node>

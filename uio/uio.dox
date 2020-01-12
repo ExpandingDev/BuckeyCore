@@ -1,0 +1,31 @@
+/**
+\page uio-intro User Input Output
+
+This module defines signals for use with Buckey for interacting with the User. 
+Several types of output signals are defined:
+- Notification
+- Alarm
+- Speaking
+- Error
+- Warning
+- Log
+
+These various output signals have differing output behaviours to forward the output data to the user:
+- Notification output signals should be displayed in a text format on all GUI and CLIs, may be spoken by a TTS service, and should be displayed on systems with a native notification implementation (Android pop notifications, notiftyd on linux).
+- Alarm output signals have the same output behaviours as Notification signals, but may also trigger sounds (alarm sounds).
+- Speaking output signals should be displayed on GUIs and CLIs, and should be spoken by TTS services.
+- Error output signals should *at least* be displayed on GUIs and CLIs, and any additional output implementations are acceptable.
+- Warning output signals should follow the same output implementation guidelines as the Error output signals.
+- Log output signals should only be displayed on GUIs and CLIs, these should *not* be spoken by TTS.
+
+Two types of input signals are defined:
+- Command
+- TextInput
+
+Command input signals should *always* be treated as commands. Even when the user is in the middle of performing another task with the system, this input should be executed as a command.
+
+TextInput signals are open to interpretation by the implementation of the Buckey system. How this input is used may depend on the context that Buckey is operating in.
+
+The definitions of these signals can be found in the \ref ca.l5.expandingdev.Buckey.UIO.xml file, which describes the interfaces and signals in DBus introspection format.
+
+*/

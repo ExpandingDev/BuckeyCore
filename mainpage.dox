@@ -1,0 +1,16 @@
+/**
+\mainpage
+Buckey Core is a library of DBus object adapters and proxies for use with DBus interfaces defined in the subdirectories.
+
+Buckey Core relies upon the <A HREF="https://github.com/dbus-cxx/dbus-cxx" >dbus-cxx library</A> for connecting and interacting with DBus, as well as for generating boiler plant code for the adapters and proxies.
+
+<b>List of Interfaces defined by Buckey Core</b>
+- \ref asr-intro - *Speech recognition*
+- TTS - *Text to Speech*
+- Service - *A way to retreive information about the daemon providing the interface*
+- Mode
+- \ref uio-intro - *How Buckey services and Modes can interact with the user*
+
+These interfaces are defined in the `.xml` file in the respective subdirectory. These files are DBus Introspection files that are then used to generate the boilder plate code for the interface adapters and proxies.
+
+*/
