@@ -14,6 +14,15 @@ namespace Buckey {
 			void notification(std::string title, std::string message, int id=-1);
 			void alarm(std::string title, std::string message, int id=-1);
 
+			void on_log(void * (callBack)(std::string));
+			void on_warning(void * (callBack)(std::string));
+			void on_warn(void * (callBack)(std::string));
+			void on_error(void * (callBack)(std::string));
+
+			void on_speak(void * (callBack)(std::string));
+			void on_notification(void * (callBack)(std::string, std::string, int));
+			void on_alarm(void * (callBack)(std::string, std::string, int));
+
 			UIO(std::shared_ptr<DBus::Object> source);
 			virtual ~UIO();
 
